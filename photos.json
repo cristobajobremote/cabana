@@ -1,6 +1,18 @@
 
 [
-  "fotos/1.jpg",
-  "fotos/2.jpg",
-  "fotos/3.jpg"
+  {
+    "url": "fotos/1.jpg",
+    "alt": "Vista exterior de la cabaña Sol del Nevado",
+    "title": "Cabaña Sol del Nevado"
+  },
+  {
+    "url": "fotos/2.jpg",
+    "alt": "Interior acogedor de la cabaña",
+    "title": "Interior de la Cabaña"
+  },
+  {
+    "url": "fotos/3.jpg",
+    "alt": "Vista panorámica de la cordillera desde la cabaña",
+    "title": "Vista Panorámica"
+  }
 ]

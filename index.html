@@ -4,57 +4,330 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cabaña Sol del Nevado</title>
+  <title>Cabaña Sol del Nevado - Tu Refugio en Las Trancas</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <meta name="facebook-domain-verification" content="ynlb422j7xrvzw3lxa678b0rg6ik0t" />
 </head>
 <body>
-  <header>
-    <h1>Cabaña Sol del Nevado</h1>
-    <p>Tu refugio en Las Trancas</p>
-  </header>
-  <main>
-    <section class="gallery">
-      <h2>Galería</h2>
-      <div class="image-grid" id="gallery-container"></div>
-    </section>
-    <section class="videos">
-      <h2>Videos</h2>
-      <div class="video-embed">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-        title="Video de la cabaña" frameborder="0" allowfullscreen></iframe>
+  <!-- Navegación -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <h2>Sol del Nevado</h2>
       </div>
-    </section>
-    <section class="contact">
-      <h2>Contacto</h2>
-      <form>
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name">
-        <label for="email">Correo:</label>
-        <input type="email" id="email" name="email">
-        <label for="message">Mensaje:</label>
-        <textarea id="message" name="message"></textarea>
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-  </main>
+      <ul class="nav-menu">
+        <li><a href="#inicio">INICIO</a></li>
+        <li><a href="#nosotros">NOSOTROS</a></li>
+        <li><a href="#alojamiento">ALOJAMIENTO</a></li>
+        <li><a href="#entorno">ENTORNO</a></li>
+        <li><a href="#multimedia">MULTIMEDIA</a></li>
+        <li><a href="#contacto">CONTACTO</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <h1>Cabaña Sol del Nevado</h1>
+      <h2>Tu Refugio en Las Trancas</h2>
+      <p>Disfruta de la naturaleza y la tranquilidad en el corazón de la cordillera</p>
+      <a href="#alojamiento" class="cta-button">SOLICITUD DE RESERVA</a>
+    </div>
+  </section>
+
+  <!-- Sección Nosotros -->
+  <section id="nosotros" class="about">
+    <div class="container">
+      <h2>NOSOTROS</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>SOL DEL NEVADO</h3>
+          <p>Nuestra cabaña está ubicada en Las Trancas, en el corazón de la cordillera de los Andes. Un lugar perfecto para desconectarse del mundo y reconectar con la naturaleza.</p>
+          <p>Ideal para el descanso y la práctica de deportes como esquí, snowboard, trekking, paseos a caballo, rutas para bicicleta, running, entre otros.</p>
+        </div>
+        <div class="about-features">
+          <div class="feature">
+            <i class="fas fa-mountain"></i>
+            <h4>Vista Panorámica</h4>
+            <p>Disfruta de vistas espectaculares a la cordillera</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-fire"></i>
+            <h4>Chimenea</h4>
+            <p>Calor y ambiente acogedor en invierno</p>
+          </div>
+          <div class="feature">
+            <i class="fas fa-wifi"></i>
+            <h4>WiFi Gratis</h4>
+            <p>Conectividad para tu comodidad</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Alojamiento -->
+  <section id="alojamiento" class="accommodation">
+    <div class="container">
+      <h2>ALOJAMIENTO</h2>
+      <div class="accommodation-card">
+        <div class="card-image">
+          <img src="fotos/1.jpg" alt="Cabaña Sol del Nevado">
+        </div>
+        <div class="card-content">
+          <h3>Cabaña Familiar</h3>
+          <p><i class="fas fa-users"></i> 8 personas</p>
+          <p><i class="fas fa-bed"></i> 3 dormitorios</p>
+          <p><i class="fas fa-utensils"></i> Cocina equipada</p>
+          <p><i class="fas fa-bath"></i> 2 baño completo</p>
+          <p><i class="fas fa-wifi"></i> WiFi gratuito</p>
+          <p><i class="fas fa-fire"></i> Estufa Bosca y Calefacción Central</p>
+          <p><i class="fas fa-mountain"></i> Vista panorámica</p>
+          
+          <div class="booking-platforms">
+            <h4>Reserva a través de:</h4>
+            <div class="platform-buttons">
+              <a href="https://www.booking.com/Share-pQX2fR" target="_blank" class="platform-button booking">
+                <i class="fas fa-calendar-check"></i>
+                <span>Booking.com</span>
+              </a>
+              <a href="https://es-l.airbnb.com/rooms/1144463672258423863?check_in=2025-10-15&check_out=2025-10-18&guests=1&adults=8&s=67&unique_share_id=079e80c9-d947-4004-b445-8c1807ec350e" target="_blank" class="platform-button airbnb">
+                <i class="fab fa-airbnb"></i>
+                <span>Airbnb</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Entorno -->
+  <section id="entorno" class="surroundings">
+    <div class="container">
+      <h2>ENTORNO</h2>
+      <div class="surroundings-grid">
+        <div class="surrounding-item">
+          <i class="fas fa-skiing"></i>
+          <h3>Deportes de Invierno</h3>
+          <p>Esquí y snowboard en Nevados de Chillán</p>
+        </div>
+        <div class="surrounding-item">
+          <i class="fas fa-hiking"></i>
+          <h3>Trekking</h3>
+          <p>Senderos y rutas de montaña</p>
+        </div>
+        <div class="surrounding-item">
+          <i class="fas fa-horse"></i>
+          <h3>Paseos a Caballo</h3>
+          <p>Explora la naturaleza montado a caballo</p>
+        </div>
+        <div class="surrounding-item">
+          <i class="fas fa-utensils"></i>
+          <h3>Gastronomía Local</h3>
+          <p>Restaurantes y cocina típica</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Multimedia -->
+  <section id="multimedia" class="multimedia">
+    <div class="container">
+      <h2>MULTIMEDIA</h2>
+      <div class="multimedia-tabs">
+        <button class="tab-button active" data-tab="gallery">GALERÍA DE IMÁGENES</button>
+        <button class="tab-button" data-tab="videos">GALERÍA DE VÍDEOS</button>
+      </div>
+      
+      <div class="tab-content active" id="gallery">
+        <div class="gallery-grid" id="gallery-container">
+          <!-- Las imágenes se cargarán dinámicamente -->
+        </div>
+      </div>
+      
+      <div class="tab-content" id="videos">
+        <div class="video-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+          title="Video de la cabaña" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Contacto -->
+  <section id="contacto" class="contact">
+    <div class="container">
+      <h2>CONTÁCTANOS</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h4>Ubicación</h4>
+              <p>Los Radales, Las Trancas, Cordillera de los Andes</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h4>Teléfono</h4>
+              <p>+56 9 40990286</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h4>Email</h4>
+              <p>contacto@cabanasoldelnevado.cl</p>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Solicitud de Reserva</h3>
+          <form>
+            <div class="form-group">
+              <label for="name">Nombre:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Teléfono:</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+              <label for="checkin">Fecha de Llegada:</label>
+              <input type="date" id="checkin" name="checkin" required>
+            </div>
+            <div class="form-group">
+              <label for="checkout">Fecha de Salida:</label>
+              <input type="date" id="checkout" name="checkout" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">Número de Huéspedes:</label>
+              <select id="guests" name="guests" required>
+                <option value="">Seleccionar</option>
+                <option value="1">1 persona</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+                <option value="5">5 personas</option>
+                <option value="6">6 personas</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Mensaje:</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Enviar Solicitud</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Cabaña Sol del Nevado. Todos los derechos reservados.</p>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Sol del Nevado</h3>
+          <p>Tu refugio en Las Trancas</p>
+        </div>
+        <div class="footer-section">
+          <h4>Contacto</h4>
+          <p>+56 9 XXXX XXXX</p>
+          <p>info@soldelnevado.cl</p>
+        </div>
+        <div class="footer-section">
+          <h4>Síguenos</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Cabaña Sol del Nevado. Todos los derechos reservados.</p>
+      </div>
+    </div>
   </footer>
+
   <script>
+    // Navegación móvil
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    // Tabs de multimedia
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tabName = button.getAttribute('data-tab');
+        
+        // Remover clase active de todos los botones y contenidos
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Agregar clase active al botón clickeado y su contenido
+        button.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+      });
+    });
+
+    // Cargar galería de imágenes
     fetch('photos.json')
       .then(res => res.json())
       .then(photos => {
         const container = document.getElementById('gallery-container');
-        photos.forEach(url => {
+        photos.forEach(photo => {
           const img = document.createElement('img');
-          img.src = url;
-          img.alt = 'Foto';
-          img.width = 300;
-          img.height = 200;
+          img.src = photo.url;
+          img.alt = photo.alt;
+          img.title = photo.title;
+          img.addEventListener('click', () => {
+            // Aquí se puede implementar un lightbox
+            console.log('Imagen clickeada:', photo.url);
+          });
           container.appendChild(img);
         });
       });
+
+    // Smooth scrolling para enlaces de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>

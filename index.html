@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cabaña Sol del Nevado</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="facebook-domain-verification" content="ynlb422j7xrvzw3lxa678b0rg6ik0t" />
+</head>
+<body>
+  <header>
+    <h1>Cabaña Sol del Nevado</h1>
+    <p>Tu refugio en Las Trancas</p>
+  </header>
+  <main>
+    <section class="gallery">
+      <h2>Galería</h2>
+      <div class="image-grid" id="gallery-container"></div>
+    </section>
+    <section class="videos">
+      <h2>Videos</h2>
+      <div class="video-embed">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY" 
+        title="Video de la cabaña" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+    <section class="contact">
+      <h2>Contacto</h2>
+      <form>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name">
+        <label for="email">Correo:</label>
+        <input type="email" id="email" name="email">
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Cabaña Sol del Nevado. Todos los derechos reservados.</p>
+  </footer>
+  <script>
+    fetch('photos.json')
+      .then(res => res.json())
+      .then(photos => {
+        const container = document.getElementById('gallery-container');
+        photos.forEach(url => {
+          const img = document.createElement('img');
+          img.src = url;
+          img.alt = 'Foto';
+          img.width = 300;
+          img.height = 200;
+          container.appendChild(img);
+        });
+      });
+  </script>
+</body>
+</html>

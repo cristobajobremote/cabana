@@ -610,8 +610,30 @@ Mensaje: ${message || 'Sin mensaje adicional'}
 Enviado desde el sitio web: https://www.cabanasoldelnevado.cl
           `.trim();
           
-          // Enviar datos al correo de la cabaña
-          const emailText = `Nueva solicitud de reserva recibida:
+          // Enviar email usando EmailJS
+          emailjs.init("u1D21pvdm7gNFCKzD");
+          
+          const templateParams = {
+            name: name,
+            from_name: name,
+            from_email: email,
+            phone: phone || 'No proporcionado',
+            checkin_date: checkin,
+            checkout_date: checkout,
+            guests: guests,
+            message: message || 'Sin mensaje adicional',
+            time: new Date().toLocaleString('es-CL'),
+            website: 'https://www.cabanasoldelnevado.cl'
+          };
+
+          // Intentar enviar con EmailJS
+          emailjs.send('service_csx55rr', 'template_j08bzxx', templateParams)
+            .then(function(response) {
+              showNotification('¡Solicitud enviada correctamente! Te contactaremos pronto.', 'success');
+              reservationForm.reset();
+            }, function(error) {
+              // Si falla EmailJS, usar método alternativo
+              const emailText = `Nueva solicitud de reserva recibida:
 
 Nombre: ${name}
 Email: ${email}
@@ -624,21 +646,14 @@ Mensaje: ${message || 'Sin mensaje adicional'}
 ---
 Enviado desde el sitio web: https://www.cabanasoldelnevado.cl`;
 
-          // Copiar al portapapeles y mostrar instrucciones
-          navigator.clipboard.writeText(emailText).then(() => {
-            showNotification('Datos copiados al portapapeles. Envía un email a contacto@cabanasoldelnevado.cl con esta información.', 'success');
-          }).catch(() => {
-            // Fallback: mostrar datos en pantalla
-            const dataDisplay = document.createElement('div');
-            dataDisplay.className = 'email-data-display';
-            dataDisplay.innerHTML = `
-              <h4>Datos de la solicitud:</h4>
-              <pre>${emailText}</pre>
-              <p>Por favor, envía un email a <strong>contacto@cabanasoldelnevado.cl</strong> con esta información.</p>
-              <button onclick="this.parentElement.remove()">Cerrar</button>
-            `;
-            document.body.appendChild(dataDisplay);
-          });
+              // Crear enlace mailto como fallback
+              const mailtoLink = `mailto:contacto@cabanasoldelnevado.cl?subject=Nueva Solicitud de Reserva - Cabaña Sol del Nevado&body=${encodeURIComponent(emailText)}`;
+              
+              // Abrir cliente de email
+              window.open(mailtoLink);
+              
+              showNotification('Se abrió tu cliente de email. Por favor, envía el mensaje.', 'info');
+            });
           
           // Limpiar formulario
           reservationForm.reset();

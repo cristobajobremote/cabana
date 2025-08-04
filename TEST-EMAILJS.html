@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test EmailJS - Cabaña Sol del Nevado</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .test-btn {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .test-btn:hover {
+            background: #1e3f6b;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test EmailJS</h1>
+        <p>Esta página te ayudará a probar la configuración de EmailJS.</p>
+        
+        <button class="test-btn" onclick="testEmailJS()">📧 Probar Envío de Email</button>
+        <button class="test-btn" onclick="showTemplateInfo()">ℹ️ Ver Info del Template</button>
+        
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Inicializar EmailJS
+        emailjs.init("u1D21pvdm7gNFCKzD");
+        
+        function testEmailJS() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '<p>Enviando email de prueba...</p>';
+            
+            const templateParams = {
+                name: 'Cliente de Prueba',
+                from_name: 'Cliente de Prueba',
+                from_email: 'test@example.com',
+                phone: '+56 9 12345678',
+                checkin_date: '2025-01-15',
+                checkout_date: '2025-01-18',
+                guests: '4',
+                message: 'Este es un mensaje de prueba para verificar que EmailJS funciona correctamente.',
+                time: new Date().toLocaleString('es-CL'),
+                website: 'https://www.cabanasoldelnevado.cl'
+            };
+            
+            // Intentar con diferentes template IDs
+            const templateIds = [
+                'template_j08bzxx',
+                'template_default',
+                'template_reserva',
+                'template_cabana',
+                'template_1',
+                'template_2'
+            ];
+            
+            let attempts = 0;
+            
+            function tryTemplate(templateId) {
+                emailjs.send('service_csx55rr', templateId, templateParams)
+                    .then(function(response) {
+                        resultDiv.className = 'result success';
+                        resultDiv.innerHTML = `
+                            <h3>✅ Email enviado correctamente!</h3>
+                            <p><strong>Template ID usado:</strong> ${templateId}</p>
+                            <p><strong>Response:</strong> ${JSON.stringify(response)}</p>
+                            <p>Revisa tu email en contacto@cabanasoldelnevado.cl</p>
+                        `;
+                    })
+                    .catch(function(error) {
+                        attempts++;
+                        if (attempts < templateIds.length) {
+                            resultDiv.innerHTML = `<p>Intentando template ${attempts + 1}...</p>`;
+                            tryTemplate(templateIds[attempts]);
+                        } else {
+                            resultDiv.className = 'result error';
+                            resultDiv.innerHTML = `
+                                <h3>❌ Error al enviar email</h3>
+                                <p><strong>Error:</strong> ${JSON.stringify(error)}</p>
+                                <p>Necesitas proporcionar el Template ID correcto.</p>
+                            `;
+                        }
+                    });
+            }
+            
+            tryTemplate(templateIds[0]);
+        }
+        
+        function showTemplateInfo() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = `
+                <h3>ℹ️ Información del Template</h3>
+                <p><strong>Service ID:</strong> service_csx55rr</p>
+                <p><strong>Public Key:</strong> u1D21pvdm7gNFCKzD</p>
+                <p><strong>Template ID:</strong> template_j08bzxx</p>
+                <p>Para encontrar tu Template ID:</p>
+                <ol>
+                    <li>Ve a tu dashboard de EmailJS</li>
+                    <li>Haz clic en "Email Templates"</li>
+                    <li>Busca tu template</li>
+                    <li>Copia el Template ID (ejemplo: template_abc123)</li>
+                </ol>
+            `;
+        }
+    </script>
+</body>
+</html> 

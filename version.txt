@@ -1,0 +1,8 @@
+Versión actualizada: 2025-01-27
+Cambios aplicados:
+- Diseño moderno inspirado en Eluney Cabañas
+- Navegación responsive
+- Sección de alojamiento con enlaces a Booking.com y Airbnb
+- Información actualizada de la cabaña (8 personas, 3 dormitorios, 2 baños)
+- Contacto actualizado con teléfono y email correctos
+- Ubicación: Los Radales, Las Trancas 

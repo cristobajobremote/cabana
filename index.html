@@ -148,15 +148,62 @@
       </div>
       
       <div class="tab-content active" id="gallery">
+        <div class="gallery-info">
+          <p><i class="fas fa-info-circle"></i> Haz clic en cualquier imagen para verla en pantalla completa</p>
+        </div>
         <div class="gallery-grid" id="gallery-container">
-          <!-- Las imágenes se cargarán dinámicamente -->
+          <div class="loading-message">Cargando imágenes...</div>
+        </div>
+        <!-- Lightbox Modal -->
+        <div id="lightbox" class="lightbox">
+          <span class="close-lightbox">&times;</span>
+          <img id="lightbox-img" src="" alt="">
+          <div class="lightbox-caption" id="lightbox-caption"></div>
+          <button class="lightbox-btn prev" onclick="changeLightboxSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="lightbox-btn next" onclick="changeLightboxSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
       
       <div class="tab-content" id="videos">
-        <div class="video-container">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY" 
-          title="Video de la cabaña" frameborder="0" allowfullscreen></iframe>
+        <div class="video-carousel">
+          <div class="carousel-container">
+            <div class="carousel-slide active">
+              <video controls>
+                <source src="videos/IMG_0174.MOV" type="video/mp4">
+                Tu navegador no soporta el elemento video.
+              </video>
+              <div class="video-caption">Vista exterior de la cabaña</div>
+            </div>
+            <div class="carousel-slide">
+              <video controls>
+                <source src="videos/IMG_0178.MOV" type="video/mp4">
+                Tu navegador no soporta el elemento video.
+              </video>
+              <div class="video-caption">Interior de la cabaña</div>
+            </div>
+            <div class="carousel-slide">
+              <video controls>
+                <source src="videos/IMG_0199.MOV" type="video/mp4">
+                Tu navegador no soporta el elemento video.
+              </video>
+              <div class="video-caption">Entorno y vistas panorámicas</div>
+            </div>
+          </div>
+          <button class="carousel-btn prev" onclick="changeSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn next" onclick="changeSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="carousel-dots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -190,9 +237,9 @@
             </div>
           </div>
           <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61574425126579" target="_blank" class="social-link"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/cabana_sol_del_nevado?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/56940990286" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
         <div class="contact-form">
@@ -251,15 +298,15 @@
         </div>
         <div class="footer-section">
           <h4>Contacto</h4>
-          <p>+56 9 XXXX XXXX</p>
-          <p>info@soldelnevado.cl</p>
+          <p>+56 9 40990286</p>
+          <p>contacto@cabanasoldelnevado.cl</p>
         </div>
         <div class="footer-section">
           <h4>Síguenos</h4>
           <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61574425126579" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/cabana_sol_del_nevado?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/56940990286" target="_blank"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </div>
@@ -297,23 +344,179 @@
       });
     });
 
+    // Variables globales para carrusel y lightbox
+    let currentVideoSlide = 0;
+    let currentLightboxSlide = 0;
+    let photos = [];
+
     // Cargar galería de imágenes
-    fetch('photos.json')
-      .then(res => res.json())
-      .then(photos => {
-        const container = document.getElementById('gallery-container');
-        photos.forEach(photo => {
+    function loadGallery() {
+      const container = document.getElementById('gallery-container');
+      if (!container) {
+        console.error('No se encontró el contenedor de galería');
+        return;
+      }
+
+      // Imágenes por defecto (todas JPG ahora)
+      const defaultImages = [
+        { url: 'fotos/1.jpg', alt: 'Cabaña Sol del Nevado', title: 'Cabaña Sol del Nevado' },
+        { url: 'fotos/2.jpg', alt: 'Interior de la Cabaña', title: 'Interior de la Cabaña' },
+        { url: 'fotos/3.jpg', alt: 'Vista Panorámica', title: 'Vista Panorámica' },
+        { url: 'fotos/IMG_0182.jpg', alt: 'Vista Exterior', title: 'Vista Exterior' },
+        { url: 'fotos/IMG_0186.jpg', alt: 'Interior Decorado', title: 'Interior Decorado' },
+        { url: 'fotos/IMG_0202.jpg', alt: 'Vista Cordillera', title: 'Vista Cordillera' },
+        { url: 'fotos/IMG_0206.jpg', alt: 'Detalles de la Cabaña', title: 'Detalles de la Cabaña' },
+        { url: 'fotos/IMG_0227.jpg', alt: 'Entorno Natural', title: 'Entorno Natural' },
+        { url: 'fotos/IMG_0234.jpg', alt: 'Vista desde la Cabaña', title: 'Vista desde la Cabaña' },
+        { url: 'fotos/IMG_0236.jpg', alt: 'Interior de la Cabaña', title: 'Interior de la Cabaña' },
+        { url: 'fotos/IMG_0237.jpg', alt: 'Vista Exterior', title: 'Vista Exterior' },
+        { url: 'fotos/IMG_0239.jpg', alt: 'Detalles Arquitectónicos', title: 'Detalles Arquitectónicos' },
+        { url: 'fotos/IMG_0264.jpg', alt: 'Vista Panorámica del Entorno', title: 'Vista Panorámica del Entorno' },
+        { url: 'fotos/IMG_0266.jpg', alt: 'Vista Final', title: 'Vista Final' }
+      ];
+
+      // Intentar cargar desde JSON, si falla usar imágenes por defecto
+      fetch('photos.json')
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('No se pudo cargar photos.json');
+          }
+          return res.json();
+        })
+        .then(photosData => {
+          console.log('Imágenes cargadas desde JSON:', photosData);
+          photos = photosData;
+          displayImages(photosData);
+        })
+        .catch(error => {
+          console.error('Error cargando photos.json, usando imágenes por defecto:', error);
+          photos = defaultImages;
+          displayImages(defaultImages);
+        });
+
+      function displayImages(imageArray) {
+        container.innerHTML = ''; // Limpiar contenedor y mensaje de carga
+        
+        imageArray.forEach((photo, index) => {
           const img = document.createElement('img');
           img.src = photo.url;
           img.alt = photo.alt;
           img.title = photo.title;
+          
           img.addEventListener('click', () => {
-            // Aquí se puede implementar un lightbox
-            console.log('Imagen clickeada:', photo.url);
+            openLightbox(index);
           });
+          
+          img.addEventListener('error', (e) => {
+            console.error('Error cargando imagen:', photo.url, e);
+            img.style.display = 'none'; // Ocultar imagen con error
+          });
+          
+          img.addEventListener('load', () => {
+            console.log('Imagen cargada exitosamente:', photo.url);
+          });
+          
           container.appendChild(img);
         });
+      }
+    }
+
+    // Cargar galería cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+      loadGallery();
+    });
+
+    // Funciones del carrusel de videos
+    function changeSlide(direction) {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.dot');
+      
+      slides[currentVideoSlide].classList.remove('active');
+      dots[currentVideoSlide].classList.remove('active');
+      
+      currentVideoSlide += direction;
+      
+      if (currentVideoSlide >= slides.length) {
+        currentVideoSlide = 0;
+      }
+      if (currentVideoSlide < 0) {
+        currentVideoSlide = slides.length - 1;
+      }
+      
+      slides[currentVideoSlide].classList.add('active');
+      dots[currentVideoSlide].classList.add('active');
+    }
+
+    function currentSlide(n) {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.dot');
+      
+      slides[currentVideoSlide].classList.remove('active');
+      dots[currentVideoSlide].classList.remove('active');
+      
+      currentVideoSlide = n - 1;
+      
+      slides[currentVideoSlide].classList.add('active');
+      dots[currentVideoSlide].classList.add('active');
+    }
+
+    // Funciones del lightbox
+    function openLightbox(index) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      
+      currentLightboxSlide = index;
+      lightboxImg.src = photos[index].url;
+      lightboxCaption.textContent = photos[index].title;
+      
+      lightbox.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function changeLightboxSlide(direction) {
+      currentLightboxSlide += direction;
+      
+      if (currentLightboxSlide >= photos.length) {
+        currentLightboxSlide = 0;
+      }
+      if (currentLightboxSlide < 0) {
+        currentLightboxSlide = photos.length - 1;
+      }
+      
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      
+      lightboxImg.src = photos[currentLightboxSlide].url;
+      lightboxCaption.textContent = photos[currentLightboxSlide].title;
+    }
+
+    // Event listeners para el lightbox
+    document.addEventListener('DOMContentLoaded', function() {
+      const lightbox = document.getElementById('lightbox');
+      const closeBtn = document.querySelector('.close-lightbox');
+      
+      closeBtn.addEventListener('click', closeLightbox);
+      
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
       });
+      
+      // Cerrar lightbox con ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeLightbox();
+        }
+      });
+    });
 
     // Smooth scrolling para enlaces de navegación
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

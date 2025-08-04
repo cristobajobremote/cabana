@@ -16,6 +16,7 @@
   
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <meta name="facebook-domain-verification" content="ynlb422j7xrvzw3lxa678b0rg6ik0t" />
 </head>
 <body>
@@ -609,14 +610,35 @@ Mensaje: ${message || 'Sin mensaje adicional'}
 Enviado desde el sitio web: https://www.cabanasoldelnevado.cl
           `.trim();
           
-          // Crear enlace de email
-          const mailtoLink = `mailto:contacto@cabanasoldelnevado.cl?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-          
-          // Abrir cliente de email
-          window.open(mailtoLink);
-          
-          // Mostrar mensaje de confirmación
-          showNotification('Solicitud enviada correctamente. Se abrirá tu cliente de email.', 'success');
+          // Enviar datos al correo de la cabaña
+          const emailText = `Nueva solicitud de reserva recibida:
+
+Nombre: ${name}
+Email: ${email}
+Teléfono: ${phone || 'No proporcionado'}
+Fecha de Llegada: ${checkin}
+Fecha de Salida: ${checkout}
+Número de Huéspedes: ${guests}
+Mensaje: ${message || 'Sin mensaje adicional'}
+
+---
+Enviado desde el sitio web: https://www.cabanasoldelnevado.cl`;
+
+          // Copiar al portapapeles y mostrar instrucciones
+          navigator.clipboard.writeText(emailText).then(() => {
+            showNotification('Datos copiados al portapapeles. Envía un email a contacto@cabanasoldelnevado.cl con esta información.', 'success');
+          }).catch(() => {
+            // Fallback: mostrar datos en pantalla
+            const dataDisplay = document.createElement('div');
+            dataDisplay.className = 'email-data-display';
+            dataDisplay.innerHTML = `
+              <h4>Datos de la solicitud:</h4>
+              <pre>${emailText}</pre>
+              <p>Por favor, envía un email a <strong>contacto@cabanasoldelnevado.cl</strong> con esta información.</p>
+              <button onclick="this.parentElement.remove()">Cerrar</button>
+            `;
+            document.body.appendChild(dataDisplay);
+          });
           
           // Limpiar formulario
           reservationForm.reset();

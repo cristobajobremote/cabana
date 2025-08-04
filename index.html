@@ -397,7 +397,7 @@
       // Imágenes por defecto (todas JPG ahora)
       const defaultImages = [
         { url: 'fotos/1.jpg', alt: 'Cabaña Sol del Nevado', title: 'Cabaña Sol del Nevado' },
-        { url: 'fotos/2.jpg', alt: 'Interior de la Cabaña', title: 'Interior de la Cabaña' },
+        { url: 'fotos/2-cropped.jpg', alt: 'Interior de la Cabaña', title: 'Interior de la Cabaña' },
         { url: 'fotos/3.jpg', alt: 'Vista Panorámica', title: 'Vista Panorámica' },
         { url: 'fotos/IMG_0182.jpg', alt: 'Vista Exterior', title: 'Vista Exterior' },
         { url: 'fotos/IMG_0186.jpg', alt: 'Interior Decorado', title: 'Interior Decorado' },
@@ -435,6 +435,9 @@
         container.innerHTML = ''; // Limpiar contenedor y mensaje de carga
         
         imageArray.forEach((photo, index) => {
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'gallery-item';
+          
           const img = document.createElement('img');
           img.src = photo.url;
           img.alt = photo.alt;
@@ -446,14 +449,24 @@
           
           img.addEventListener('error', (e) => {
             console.error('Error cargando imagen:', photo.url, e);
-            img.style.display = 'none'; // Ocultar imagen con error
+            imgContainer.style.display = 'none'; // Ocultar contenedor con error
           });
           
           img.addEventListener('load', () => {
             console.log('Imagen cargada exitosamente:', photo.url);
           });
           
-          container.appendChild(img);
+          imgContainer.appendChild(img);
+          
+          // Agregar overlay para proteger información sensible
+          if (photo.hasOverlay) {
+            const overlay = document.createElement('div');
+            overlay.className = 'image-overlay';
+            overlay.innerHTML = '<i class="fas fa-shield-alt"></i> Información protegida';
+            imgContainer.appendChild(overlay);
+          }
+          
+          container.appendChild(imgContainer);
         });
       }
     }

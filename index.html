@@ -281,7 +281,7 @@
         </div>
         <div class="contact-form">
           <h3>Solicitud de Reserva</h3>
-          <form>
+          <form id="reservation-form">
             <div class="form-group">
               <label for="name">Nombre:</label>
               <input type="text" id="name" name="name" required>
@@ -567,6 +567,105 @@
         }
       });
     });
+
+    // Manejo del formulario de reserva
+    document.addEventListener('DOMContentLoaded', function() {
+      const reservationForm = document.getElementById('reservation-form');
+      
+      if (reservationForm) {
+        reservationForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Obtener datos del formulario
+          const formData = new FormData(reservationForm);
+          const name = formData.get('name');
+          const email = formData.get('email');
+          const phone = formData.get('phone');
+          const checkin = formData.get('checkin');
+          const checkout = formData.get('checkout');
+          const guests = formData.get('guests');
+          const message = formData.get('message');
+          
+          // Validar fechas
+          if (new Date(checkin) >= new Date(checkout)) {
+            alert('La fecha de salida debe ser posterior a la fecha de llegada.');
+            return;
+          }
+          
+          // Crear contenido del email
+          const emailSubject = 'Nueva Solicitud de Reserva - Cabaña Sol del Nevado';
+          const emailBody = `
+Nueva solicitud de reserva recibida:
+
+Nombre: ${name}
+Email: ${email}
+Teléfono: ${phone || 'No proporcionado'}
+Fecha de Llegada: ${checkin}
+Fecha de Salida: ${checkout}
+Número de Huéspedes: ${guests}
+Mensaje: ${message || 'Sin mensaje adicional'}
+
+---
+Enviado desde el sitio web: https://www.cabanasoldelnevado.cl
+          `.trim();
+          
+          // Crear enlace de email
+          const mailtoLink = `mailto:contacto@cabanasoldelnevado.cl?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+          
+          // Abrir cliente de email
+          window.open(mailtoLink);
+          
+          // Mostrar mensaje de confirmación
+          showNotification('Solicitud enviada correctamente. Se abrirá tu cliente de email.', 'success');
+          
+          // Limpiar formulario
+          reservationForm.reset();
+        });
+      }
+    });
+
+    // Función para mostrar notificaciones
+    function showNotification(message, type = 'info') {
+      // Crear elemento de notificación
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <div class="notification-content">
+          <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+          <span>${message}</span>
+          <button class="notification-close">&times;</button>
+        </div>
+      `;
+      
+      // Agregar al body
+      document.body.appendChild(notification);
+      
+      // Mostrar notificación
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      // Cerrar notificación
+      const closeBtn = notification.querySelector('.notification-close');
+      closeBtn.addEventListener('click', () => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      });
+      
+      // Auto-cerrar después de 5 segundos
+      setTimeout(() => {
+        if (document.body.contains(notification)) {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            if (document.body.contains(notification)) {
+              document.body.removeChild(notification);
+            }
+          }, 300);
+        }
+      }, 5000);
+    }
 
     // Smooth scrolling para enlaces de navegación
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {

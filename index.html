@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Cabaña Sol del Nevado - Tu Refugio en Las Trancas</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -558,6 +561,27 @@
         }
       });
     });
+
+    // Cache Buster - Forzar actualización de recursos
+    (function() {
+        const timestamp = new Date().getTime();
+        
+        // Actualizar CSS
+        const cssLink = document.querySelector('link[href="styles.css"]');
+        if (cssLink) {
+            cssLink.href = 'styles.css?v=' + timestamp;
+        }
+        
+        // Actualizar imágenes dinámicamente
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            if (img.src && img.src.includes('fotos/')) {
+                img.src = img.src + '?v=' + timestamp;
+            }
+        });
+        
+        console.log('Cache buster aplicado - Timestamp:', timestamp);
+    })();
   </script>
 </body>
 </html>

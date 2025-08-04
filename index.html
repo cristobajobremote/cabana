@@ -10,8 +10,9 @@
   <title>Cabaña Sol del Nevado - Tu Refugio en Las Trancas</title>
   
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="logocabana.png">
-  <link rel="apple-touch-icon" href="logocabana.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="favicon.png">
   
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -577,6 +578,14 @@
         if (cssLink) {
             cssLink.href = 'styles.css?v=' + timestamp;
         }
+        
+        // Actualizar favicon
+        const faviconLinks = document.querySelectorAll('link[rel="icon"]');
+        faviconLinks.forEach(link => {
+            if (link.href.includes('favicon')) {
+                link.href = link.href.split('?')[0] + '?v=' + timestamp;
+            }
+        });
         
         // Actualizar imágenes dinámicamente
         const images = document.querySelectorAll('img');

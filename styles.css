@@ -593,7 +593,7 @@ section h2 {
 /* Carrusel de Videos */
 .video-carousel {
   position: relative;
-  max-width: 800px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
@@ -603,7 +603,7 @@ section h2 {
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   background: #000;
-  min-height: 400px;
+  min-height: 700px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -625,7 +625,16 @@ section h2 {
 
 .carousel-slide iframe {
   width: 100%;
-  height: 400px;
+  height: 700px;
+  border-radius: 15px;
+  background: #000;
+}
+
+.carousel-slide video {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+  object-position: center top;
   border-radius: 15px;
   background: #000;
 }
@@ -657,6 +666,7 @@ section h2 {
   font-size: 1.2rem;
   transition: all 0.3s ease;
   z-index: 10;
+  display: none; /* Ocultar botones ya que solo hay un video */
 }
 
 .carousel-btn:hover {
@@ -675,6 +685,7 @@ section h2 {
 .carousel-dots {
   text-align: center;
   margin-top: 20px;
+  display: none; /* Ocultar puntos ya que solo hay un video */
 }
 
 .dot {

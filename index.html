@@ -115,7 +115,7 @@
         </div>
         <div class="card-content">
           <h3>Cabaña Familiar</h3>
-          <p><i class="fas fa-users"></i> 8 personas</p>
+          <p><i class="fas fa-users"></i> 10 personas</p>
           <p><i class="fas fa-bed"></i> 3 dormitorios</p>
           <p><i class="fas fa-utensils"></i> Cocina equipada</p>
           <p><i class="fas fa-bath"></i> 2 baño completo</p>
@@ -204,32 +204,13 @@
         <div class="video-carousel">
           <div class="carousel-container">
             <div class="carousel-slide active">
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                      title="Vista exterior de la cabaña" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
+              <video controls>
+                <source src="videos/b0b0089d967a41c285b21d71fbe819ed.mp4" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+              </video>
               <div class="video-caption">Vista exterior de la cabaña</div>
             </div>
-            <div class="carousel-slide">
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                      title="Interior de la cabaña" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
-              <div class="video-caption">Interior de la cabaña</div>
-            </div>
-            <div class="carousel-slide">
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                      title="Entorno y vistas panorámicas" 
-                      frameborder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowfullscreen>
-              </iframe>
-              <div class="video-caption">Entorno y vistas panorámicas</div>
-            </div>
+
           </div>
           <button class="carousel-btn prev" onclick="changeSlide(-1)">
             <i class="fas fa-chevron-left"></i>
@@ -239,8 +220,6 @@
           </button>
           <div class="carousel-dots">
             <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
           </div>
         </div>
       </div>
@@ -313,6 +292,10 @@
                 <option value="4">4 personas</option>
                 <option value="5">5 personas</option>
                 <option value="6">6 personas</option>
+                <option value="7">7 personas</option>
+                <option value="8">8 personas</option>
+                <option value="9">9 personas</option>
+                <option value="10">10 personas</option>
               </select>
             </div>
             <div class="form-group">
@@ -477,38 +460,15 @@
       loadGallery();
     });
 
-    // Funciones del carrusel de videos
+    // Funciones del carrusel de videos (simplificado para un solo video)
     function changeSlide(direction) {
-      const slides = document.querySelectorAll('.carousel-slide');
-      const dots = document.querySelectorAll('.dot');
-      
-      slides[currentVideoSlide].classList.remove('active');
-      dots[currentVideoSlide].classList.remove('active');
-      
-      currentVideoSlide += direction;
-      
-      if (currentVideoSlide >= slides.length) {
-        currentVideoSlide = 0;
-      }
-      if (currentVideoSlide < 0) {
-        currentVideoSlide = slides.length - 1;
-      }
-      
-      slides[currentVideoSlide].classList.add('active');
-      dots[currentVideoSlide].classList.add('active');
+      // No hacer nada ya que solo hay un video
+      return;
     }
 
     function currentSlide(n) {
-      const slides = document.querySelectorAll('.carousel-slide');
-      const dots = document.querySelectorAll('.dot');
-      
-      slides[currentVideoSlide].classList.remove('active');
-      dots[currentVideoSlide].classList.remove('active');
-      
-      currentVideoSlide = n - 1;
-      
-      slides[currentVideoSlide].classList.add('active');
-      dots[currentVideoSlide].classList.add('active');
+      // No hacer nada ya que solo hay un video
+      return;
     }
 
     // Funciones del lightbox

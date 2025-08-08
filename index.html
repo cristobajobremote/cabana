@@ -7,6 +7,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
+  <meta name="timestamp" content="v2024-12-19-15-30">
   <title>Cabaña Sol del Nevado - Tu Refugio en Las Trancas</title>
   
   <!-- Favicons -->
@@ -14,7 +15,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
   <link rel="apple-touch-icon" href="favicon.png">
   
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20241219-1610">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <meta name="facebook-domain-verification" content="ynlb422j7xrvzw3lxa678b0rg6ik0t" />
@@ -198,29 +199,51 @@
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
+
+        <!-- Lightbox para Videos -->
+        <div id="video-lightbox" class="video-lightbox">
+          <span class="close-video-lightbox">&times;</span>
+          <video id="lightbox-video" controls>
+            <source src="" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+          <div class="video-lightbox-caption" id="video-lightbox-caption"></div>
+          <button class="video-lightbox-btn prev" onclick="changeVideoLightboxSlide(-1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="video-lightbox-btn next" onclick="changeVideoLightboxSlide(1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
       </div>
       
       <div class="tab-content" id="videos">
-        <div class="video-carousel">
-          <div class="carousel-container">
-            <div class="carousel-slide active">
-              <video controls>
-                <source src="videos/b0b0089d967a41c285b21d71fbe819ed.mp4" type="video/mp4">
-                Tu navegador no soporta el elemento de video.
-              </video>
-              <div class="video-caption">Vista exterior de la cabaña</div>
-            </div>
-
-          </div>
-          <button class="carousel-btn prev" onclick="changeSlide(-1)">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button class="carousel-btn next" onclick="changeSlide(1)">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-          <div class="carousel-dots">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-          </div>
+        <p class="gallery-info">
+          <i class="fas fa-info-circle"></i>
+          Haz clic en cualquier video para verlo en pantalla completa
+        </p>
+        <div class="gallery-grid">
+          <video class="video-item" data-video-index="0" onclick="openVideoLightbox(0)" controls>
+            <source src="videos/b0b0089d967a41c285b21d71fbe819ed.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+          <video class="video-item" data-video-index="1" onclick="openVideoLightbox(1)" controls>
+            <source src="videos/d0ab1ab7017345e4a8e54e8c6be659bc.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+          <video class="video-item" data-video-index="2" onclick="openVideoLightbox(2)" controls>
+            <source src="videos/1ebdd9e697f34ce2bd0d174c5412f253.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+          <video class="video-item" data-video-index="3" onclick="openVideoLightbox(3)" controls>
+            <source src="videos/E34FB3D7-DFC1-420E-B87B-83C9E17CC196.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
+          <video class="video-item" data-video-index="4" onclick="openVideoLightbox(4)" controls>
+            <source src="videos/0626515a0f554f64befb05a035540ebc.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+          </video>
         </div>
       </div>
     </div>
@@ -368,6 +391,7 @@
     // Variables globales para carrusel y lightbox
     let currentVideoSlide = 0;
     let currentLightboxSlide = 0;
+    let currentVideoLightboxSlide = 0;
     let photos = [];
 
     // Cargar galería de imágenes
@@ -460,15 +484,38 @@
       loadGallery();
     });
 
-    // Funciones del carrusel de videos (simplificado para un solo video)
+    // Funciones del carrusel de videos
     function changeSlide(direction) {
-      // No hacer nada ya que solo hay un video
-      return;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.dot');
+      
+      slides[currentVideoSlide].classList.remove('active');
+      dots[currentVideoSlide].classList.remove('active');
+      
+      currentVideoSlide += direction;
+      
+      if (currentVideoSlide >= slides.length) {
+        currentVideoSlide = 0;
+      }
+      if (currentVideoSlide < 0) {
+        currentVideoSlide = slides.length - 1;
+      }
+      
+      slides[currentVideoSlide].classList.add('active');
+      dots[currentVideoSlide].classList.add('active');
     }
 
     function currentSlide(n) {
-      // No hacer nada ya que solo hay un video
-      return;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.dot');
+      
+      slides[currentVideoSlide].classList.remove('active');
+      dots[currentVideoSlide].classList.remove('active');
+      
+      currentVideoSlide = n - 1;
+      
+      slides[currentVideoSlide].classList.add('active');
+      dots[currentVideoSlide].classList.add('active');
     }
 
     // Funciones del lightbox
@@ -527,6 +574,90 @@
           closeLightbox();
         }
       });
+    });
+
+    // Array de videos global
+    const videosData = [
+      { src: 'videos/b0b0089d967a41c285b21d71fbe819ed.mp4', title: 'Vista exterior de la cabaña' },
+      { src: 'videos/d0ab1ab7017345e4a8e54e8c6be659bc.mp4', title: 'Interior de la cabaña' },
+      { src: 'videos/1ebdd9e697f34ce2bd0d174c5412f253.mp4', title: 'Entorno y vistas panorámicas' },
+      { src: 'videos/E34FB3D7-DFC1-420E-B87B-83C9E17CC196.mp4', title: 'Actividades en la cabaña' },
+      { src: 'videos/0626515a0f554f64befb05a035540ebc.mp4', title: 'Experiencia completa' }
+    ];
+
+    // Funciones del lightbox para videos
+    function openVideoLightbox(index) {
+      console.log('Abriendo lightbox video:', index);
+      const videoLightbox = document.getElementById('video-lightbox');
+      const lightboxVideo = document.getElementById('lightbox-video');
+      const videoLightboxCaption = document.getElementById('video-lightbox-caption');
+      
+      if (!videoLightbox || !lightboxVideo) {
+        console.error('Elementos del lightbox no encontrados');
+        return;
+      }
+      
+      currentVideoLightboxSlide = index;
+      lightboxVideo.src = videosData[index].src;
+      if (videoLightboxCaption) {
+        videoLightboxCaption.textContent = videosData[index].title;
+      }
+      
+      videoLightbox.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      console.log('Lightbox mostrado');
+    }
+
+    function closeVideoLightbox() {
+      const videoLightbox = document.getElementById('video-lightbox');
+      const lightboxVideo = document.getElementById('lightbox-video');
+      
+      // Pausar el video antes de cerrar
+      lightboxVideo.pause();
+      videoLightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function changeVideoLightboxSlide(direction) {
+      currentVideoLightboxSlide += direction;
+      
+      if (currentVideoLightboxSlide >= videosData.length) {
+        currentVideoLightboxSlide = 0;
+      }
+      if (currentVideoLightboxSlide < 0) {
+        currentVideoLightboxSlide = videosData.length - 1;
+      }
+      
+      const lightboxVideo = document.getElementById('lightbox-video');
+      const videoLightboxCaption = document.getElementById('video-lightbox-caption');
+      
+      // Pausar el video actual antes de cambiar
+      lightboxVideo.pause();
+      lightboxVideo.src = videosData[currentVideoLightboxSlide].src;
+      videoLightboxCaption.textContent = videosData[currentVideoLightboxSlide].title;
+    }
+
+    // Event listeners para el lightbox de videos
+    document.addEventListener('DOMContentLoaded', function() {
+      const videoLightbox = document.getElementById('video-lightbox');
+      const closeVideoBtn = document.querySelector('.close-video-lightbox');
+      
+      closeVideoBtn.addEventListener('click', closeVideoLightbox);
+      
+      videoLightbox.addEventListener('click', function(e) {
+        if (e.target === videoLightbox) {
+          closeVideoLightbox();
+        }
+      });
+      
+      // Cerrar lightbox de videos con ESC
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeVideoLightbox();
+        }
+      });
+
+      // Los videos ya tienen onclick directamente en el HTML
     });
 
     // Manejo del formulario de reserva

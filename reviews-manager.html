@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestión de Reseñas - Cabaña Sol del Nevado</title>
+  <link rel="stylesheet" href="reviews-manager.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-container">
+    <header class="admin-header">
+      <h1><i class="fas fa-star"></i> Gestión de Reseñas</h1>
+      <p>Cabaña Sol del Nevado - Panel de Administración</p>
+    </header>
+
+    <div class="admin-content">
+      <!-- Panel de Estadísticas -->
+      <div class="stats-panel">
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <div class="stat-info">
+            <h3 id="total-reviews">0</h3>
+            <p>Total Reseñas</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-star"></i>
+          <div class="stat-info">
+            <h3 id="avg-rating">0.0</h3>
+            <p>Calificación Promedio</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-calendar-check"></i>
+          <div class="stat-info">
+            <h3 id="booking-reviews">0</h3>
+            <p>Reseñas Booking</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fab fa-airbnb"></i>
+          <div class="stat-info">
+            <h3 id="airbnb-reviews">0</h3>
+            <p>Reseñas Airbnb</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario para Agregar/Editar Reseña -->
+      <div class="form-section">
+        <h2><i class="fas fa-plus-circle"></i> Agregar Nueva Reseña</h2>
+        <form id="review-form" class="review-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="guest-name">Nombre del Huésped *</label>
+              <input type="text" id="guest-name" name="guestName" required>
+            </div>
+            <div class="form-group">
+              <label for="guest-country">País *</label>
+              <select id="guest-country" name="country" required>
+                <option value="">Seleccionar país</option>
+                <option value="Chile">Chile</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Perú">Perú</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="Canadá">Canadá</option>
+                <option value="España">España</option>
+                <option value="Alemania">Alemania</option>
+                <option value="Francia">Francia</option>
+                <option value="Reino Unido">Reino Unido</option>
+                <option value="Australia">Australia</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="guest-photo">Foto del Huésped</label>
+              <div class="photo-upload">
+                <input type="file" id="guest-photo" name="guestPhoto" accept="image/*">
+                <div class="upload-preview" id="photo-preview">
+                  <i class="fas fa-camera"></i>
+                  <span>Haz clic para subir foto</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="rating">Calificación *</label>
+              <div class="rating-input">
+                <input type="radio" name="rating" value="5" id="star5" required>
+                <label for="star5"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" value="4" id="star4">
+                <label for="star4"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" value="3" id="star3">
+                <label for="star3"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" value="2" id="star2">
+                <label for="star2"><i class="fas fa-star"></i></label>
+                <input type="radio" name="rating" value="1" id="star1">
+                <label for="star1"><i class="fas fa-star"></i></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="review-text">Texto de la Reseña *</label>
+            <textarea id="review-text" name="reviewText" rows="4" required placeholder="Escribe aquí la reseña del huésped..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="platform">Plataforma *</label>
+              <select id="platform" name="platform" required>
+                <option value="">Seleccionar plataforma</option>
+                <option value="booking">Booking.com</option>
+                <option value="airbnb">Airbnb</option>
+                <option value="direct">Directo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="stay-date">Fecha de la Estadía</label>
+              <input type="date" id="stay-date" name="stayDate">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="stay-duration">Duración de la Estadía</label>
+              <input type="text" id="stay-duration" name="stayDuration" placeholder="Ej: 3 noches">
+            </div>
+            <div class="form-group">
+              <label for="guest-count">Número de Huéspedes</label>
+              <input type="number" id="guest-count" name="guestCount" min="1" max="10">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="host-response">Respuesta del Anfitrión (Opcional)</label>
+            <textarea id="host-response" name="hostResponse" rows="3" placeholder="Respuesta del anfitrión a la reseña..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-save"></i> Guardar Reseña
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+              <i class="fas fa-undo"></i> Limpiar Formulario
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Lista de Reseñas -->
+      <div class="reviews-section">
+        <h2><i class="fas fa-list"></i> Reseñas Existentes</h2>
+        
+        <div class="filters">
+          <select id="platform-filter" onchange="filterReviews()">
+            <option value="all">Todas las plataformas</option>
+            <option value="booking">Booking.com</option>
+            <option value="airbnb">Airbnb</option>
+            <option value="direct">Directo</option>
+          </select>
+          <select id="rating-filter" onchange="filterReviews()">
+            <option value="all">Todas las calificaciones</option>
+            <option value="5">5 estrellas</option>
+            <option value="4">4+ estrellas</option>
+            <option value="3">3+ estrellas</option>
+          </select>
+          <button class="btn btn-outline" onclick="exportReviews()">
+            <i class="fas fa-download"></i> Exportar
+          </button>
+        </div>
+
+        <div class="reviews-list" id="reviews-list">
+          <!-- Las reseñas se cargarán dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Importar Reseñas -->
+      <div class="import-section">
+        <h2><i class="fas fa-upload"></i> Importar Reseñas</h2>
+        <div class="import-options">
+          <div class="import-card">
+            <h3>Desde CSV</h3>
+            <p>Sube un archivo CSV con las reseñas</p>
+            <input type="file" id="csv-import" accept=".csv" onchange="importFromCSV(this)">
+            <label for="csv-import" class="btn btn-outline">
+              <i class="fas fa-file-csv"></i> Seleccionar CSV
+            </label>
+          </div>
+          <div class="import-card">
+            <h3>Desde JSON</h3>
+            <p>Sube un archivo JSON con las reseñas</p>
+            <input type="file" id="json-import" accept=".json" onchange="importFromJSON(this)">
+            <label for="json-import" class="btn btn-outline">
+              <i class="fas fa-file-code"></i> Seleccionar JSON
+            </label>
+          </div>
+          <div class="import-card">
+            <h3>Desde Airbnb</h3>
+            <p>Pega el enlace de tu perfil de Airbnb</p>
+            <input type="url" id="airbnb-url" placeholder="https://www.airbnb.cl/users/reviews?show_reviews_by_you=true">
+            <button class="btn btn-outline" onclick="importFromAirbnb()">
+              <i class="fab fa-airbnb"></i> Importar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Editar Reseña -->
+  <div id="edit-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Editar Reseña</h2>
+      <form id="edit-form" class="review-form">
+        <!-- Formulario de edición -->
+      </form>
+    </div>
+  </div>
+
+  <script src="reviews-manager.js"></script>
+</body>
+</html> 

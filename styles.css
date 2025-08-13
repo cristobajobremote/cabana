@@ -1279,3 +1279,556 @@ footer {
     font-size: 1rem;
   }
 }
+
+
+
+/* Estilos para la sección de Reseñas y Testimonios */
+.reviews {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 80px 0;
+}
+
+.reviews h2 {
+  text-align: center;
+  color: #2c5aa0;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.reviews-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviews-carousel {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.reviews-container {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.review-card {
+  min-width: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  display: none;
+  border: 1px solid #e9ecef;
+}
+
+.review-card.active {
+  opacity: 1;
+  transform: scale(1);
+  display: block;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.guest-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.guest-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.guest-details h4 {
+  color: #2c5aa0;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.guest-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.country-flag {
+  font-size: 1.2rem;
+}
+
+.platform-badge {
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.stars i {
+  color: #ffd700;
+  font-size: 1rem;
+}
+
+.stars i.filled {
+  color: #ffd700;
+}
+
+.stars i:not(.filled) {
+  color: #ddd;
+}
+
+.rating-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c5aa0;
+}
+
+.review-content {
+  margin-bottom: 25px;
+}
+
+.review-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  border-left: 4px solid #2c5aa0;
+  padding-left: 20px;
+}
+
+.translation-info {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 3px solid #28a745;
+}
+
+.translation-info small {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.show-original-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.3s ease;
+}
+
+.show-original-btn:hover {
+  background: #218838;
+}
+
+.review-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.stay-info {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stay-info span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.stay-info i {
+  color: #2c5aa0;
+}
+
+.review-date {
+  color: #999;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.host-response {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #28a745;
+}
+
+.response-header {
+  color: #28a745;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.response-text {
+  color: #333;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.response-date {
+  color: #666;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.helpful-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s ease;
+}
+
+.helpful-btn:hover {
+  background: #5a6268;
+}
+
+.helpful-count {
+  font-weight: bold;
+}
+
+.more-info-btn {
+  color: #2c5aa0;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.more-info-btn:hover {
+  color: #1e3a5f;
+}
+
+.reviews-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.reviews-pagination .pagination-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reviews-pagination .pagination-dot:hover {
+  background: #2c5aa0;
+  transform: scale(1.2);
+}
+
+.reviews-pagination .pagination-dot.active {
+  background: #2c5aa0;
+  transform: scale(1.2);
+}
+
+.reviews-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+  margin-bottom: 50px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 30px 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2c5aa0;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.stat-stars {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.stat-stars i {
+  color: #ffd700;
+  font-size: 1.2rem;
+}
+
+.stat-icon {
+  font-size: 2rem;
+  color: #28a745;
+}
+
+.reviews-platforms {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.reviews-platforms h3 {
+  color: #2c5aa0;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.platform-badges {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.platform-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 25px;
+  border-radius: 15px;
+  color: white;
+  min-width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.platform-badge:hover {
+  transform: translateY(-5px);
+}
+
+.platform-badge.booking {
+  background: linear-gradient(135deg, #003580 0%, #0056b3 100%);
+}
+
+.platform-badge.airbnb {
+  background: linear-gradient(135deg, #ff5a5f 0%, #e31c5f 100%);
+}
+
+.platform-badge i {
+  font-size: 2rem;
+}
+
+.platform-badge span {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.platform-rating {
+  text-align: center;
+}
+
+.platform-rating .stars {
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.platform-rating .stars i {
+  color: #ffd700;
+  font-size: 1rem;
+}
+
+.rating-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Responsive para reseñas */
+@media (max-width: 768px) {
+  .reviews {
+    padding: 60px 0;
+  }
+  
+  .reviews h2 {
+    font-size: 2rem;
+  }
+  
+  .reviews-subtitle {
+    font-size: 1rem;
+    margin-bottom: 40px;
+  }
+  
+  .review-card {
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .guest-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .guest-details h4 {
+    font-size: 1.1rem;
+  }
+  
+  .review-text {
+    font-size: 1rem;
+    padding-left: 15px;
+  }
+  
+  .stay-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .reviews-stats {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .platform-badges {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .platform-badge {
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews {
+    padding: 50px 0;
+  }
+  
+  .reviews h2 {
+    font-size: 1.8rem;
+  }
+  
+  .reviews-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
+  
+  .review-card {
+    padding: 15px;
+  }
+  
+  .guest-avatar {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  
+  .guest-details h4 {
+    font-size: 1rem;
+  }
+  
+  .review-text {
+    font-size: 0.9rem;
+    padding-left: 10px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  
+  .platform-badge {
+    min-width: 160px;
+    padding: 20px;
+  }
+  
+  .platform-badge i {
+    font-size: 1.5rem;
+  }
+  
+  .platform-badge span {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,31 @@
+name = "cabanasoldelnevado-reviews"
+main = "src/index.js"
+compatibility_date = "2024-12-20"
+
+[env.production]
+name = "cabanasoldelnevado-reviews-prod"
+
+[env.staging]
+name = "cabanasoldelnevado-reviews-staging"
+
+# D1 Database para reseñas
+[[d1_databases]]
+binding = "DB"
+database_name = "cabanasoldelnevado-reviews"
+database_id = "your-database-id-here"
+
+# R2 Storage para imágenes
+[[r2_buckets]]
+binding = "IMAGES_BUCKET"
+bucket_name = "cabanasoldelnevado-images"
+
+# KV para configuración
+[[kv_namespaces]]
+binding = "CONFIG"
+id = "your-kv-namespace-id-here"
+
+# Variables de entorno
+[vars]
+ENVIRONMENT = "production"
+MAX_IMAGE_SIZE = "5242880" # 5MB
+ALLOWED_IMAGE_TYPES = "image/jpeg,image/png,image/webp,image/gif" 

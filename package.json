@@ -1,0 +1,53 @@
+{
+  "name": "cabanasoldelnevado-reviews-api",
+  "version": "1.0.0",
+  "description": "API de reseñas para Cabaña Sol del Nevado - Cloudflare Workers",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:production": "wrangler deploy --env production",
+    "db:create": "wrangler d1 create cabanasoldelnevado-reviews",
+    "db:migrate": "wrangler d1 execute cabanasoldelnevado-reviews --file=./schema.sql",
+    "db:seed": "wrangler d1 execute cabanasoldelnevado-reviews --file=./seed.sql",
+    "r2:create": "wrangler r2 bucket create cabanasoldelnevado-images",
+    "kv:create": "wrangler kv:namespace create CONFIG",
+    "test": "vitest",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.js"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "d1",
+    "r2",
+    "reviews",
+    "api",
+    "cabaña",
+    "sol-del-nevado"
+  ],
+  "author": "Cabaña Sol del Nevado",
+  "license": "MIT",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "vitest": "^1.1.0",
+    "wrangler": "^3.22.1"
+  },
+  "dependencies": {
+    "itty-router": "^4.0.27"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cabanasoldelnevado/reviews-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cabanasoldelnevado/reviews-api/issues"
+  },
+  "homepage": "https://github.com/cabanasoldelnevado/reviews-api#readme"
+} 

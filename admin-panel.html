@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de Administración - Cabaña Sol del Nevado</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="reviews-manager.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .admin-header {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+    }
+    
+    .admin-header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    
+    .admin-header p {
+      margin: 10px 0 0 0;
+      opacity: 0.9;
+    }
+    
+    .admin-nav {
+      background: #34495e;
+      padding: 15px 0;
+      text-align: center;
+    }
+    
+    .admin-nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    
+    .admin-nav a:hover,
+    .admin-nav a.active {
+      background: #3498db;
+    }
+    
+    .admin-nav a i {
+      margin-right: 8px;
+    }
+    
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .logout-btn:hover {
+      background: #c0392b;
+    }
+    
+    .admin-content {
+      padding: 30px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .welcome-section {
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .welcome-section h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    
+    .welcome-section p {
+      color: #7f8c8d;
+      margin: 0;
+    }
+    
+    .admin-section {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .admin-section h3 {
+      color: #2c3e50;
+      border-bottom: 2px solid #ecf0f1;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    
+    .stat-card h4 {
+      margin: 0 0 10px 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .stat-card .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .action-card {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .action-card:hover {
+      border-color: #3498db;
+      transform: translateY(-2px);
+    }
+    
+    .action-card i {
+      font-size: 2rem;
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+    
+    .action-card h4 {
+      color: #2c3e50;
+      margin: 0 0 10px 0;
+    }
+    
+    .action-card p {
+      color: #7f8c8d;
+      margin: 0 0 15px 0;
+      font-size: 0.9rem;
+    }
+    
+    .action-btn {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .action-btn:hover {
+      background: #2980b9;
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Verificación de login -->
+  <div id="login-check" class="hidden">
+    <div style="text-align: center; padding: 100px 20px;">
+      <h2>Verificando acceso...</h2>
+      <p>Redirigiendo al login...</p>
+    </div>
+  </div>
+
+  <!-- Panel de administración -->
+  <div id="admin-panel">
+    <header class="admin-header">
+      <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+      </button>
+      <h1><i class="fas fa-cog"></i> Panel de Administración</h1>
+      <p>Cabaña Sol del Nevado - Gestión Completa</p>
+    </header>
+
+    <nav class="admin-nav">
+      <a href="#" class="active" onclick="showSection('dashboard')">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+      </a>
+      <a href="#" onclick="showSection('reviews')">
+        <i class="fas fa-star"></i> Gestión de Reseñas
+      </a>
+      <a href="#" onclick="showSection('settings')">
+        <i class="fas fa-cogs"></i> Configuración
+      </a>
+    </nav>
+
+    <div class="admin-content">
+      <!-- Dashboard -->
+      <div id="dashboard-section" class="admin-section">
+        <div class="welcome-section">
+          <h2>¡Bienvenido al Panel de Administración!</h2>
+          <p>Gestiona las reseñas de tus huéspedes y configura tu sitio desde un solo lugar.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h4>Total de Reseñas</h4>
+            <div class="stat-value" id="total-reviews">0</div>
+          </div>
+          <div class="stat-card">
+            <h4>Calificación Promedio</h4>
+            <div class="stat-value" id="avg-rating">0.0</div>
+          </div>
+          <div class="stat-card">
+            <h4>Reseñas este Mes</h4>
+            <div class="stat-value" id="monthly-reviews">0</div>
+          </div>
+          <div class="stat-card">
+            <h4>Plataformas Activas</h4>
+            <div class="stat-value" id="active-platforms">0</div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <div class="action-card">
+            <i class="fas fa-plus-circle"></i>
+            <h4>Agregar Nueva Reseña</h4>
+            <p>Crear una nueva reseña para un huésped</p>
+            <button class="action-btn" onclick="showSection('reviews')">
+              <i class="fas fa-plus"></i> Agregar
+            </button>
+          </div>
+          
+          <div class="action-card">
+            <i class="fas fa-chart-bar"></i>
+            <h4>Ver Estadísticas</h4>
+            <p>Analizar el rendimiento de las reseñas</p>
+            <button class="action-btn" onclick="showSection('reviews')">
+              <i class="fas fa-chart-line"></i> Ver Stats
+            </button>
+          </div>
+          
+          <div class="action-card">
+            <i class="fas fa-cog"></i>
+            <h4>Configuración</h4>
+            <p>Gestionar configuraciones del sistema</p>
+            <button class="action-btn" onclick="showSection('settings')">
+              <i class="fas fa-wrench"></i> Configurar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gestión de Reseñas -->
+      <div id="reviews-section" class="admin-section hidden">
+        <h3><i class="fas fa-star"></i> Gestión de Reseñas</h3>
+        <div id="reviews-manager-content">
+          <!-- Aquí se cargará el contenido del reviews-manager -->
+        </div>
+      </div>
+
+      <!-- Configuración -->
+      <div id="settings-section" class="admin-section hidden">
+        <h3><i class="fas fa-cogs"></i> Configuración del Sistema</h3>
+        <div class="settings-content">
+          <div class="form-group">
+            <label>Ambiente Actual:</label>
+            <select id="environment-selector" onchange="switchEnvironment(this.value)">
+              <option value="local">🏠 Local</option>
+              <option value="staging">🧪 Staging</option>
+              <option value="production">🚀 Production</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Credenciales de API:</label>
+            <div class="api-info">
+              <p><strong>URL de la API:</strong> <span id="api-url">Cargando...</span></p>
+              <p><strong>Estado:</strong> <span id="api-status">🔄 Verificando...</span></p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Acciones del Sistema:</label>
+            <div class="system-actions">
+              <button class="btn btn-secondary" onclick="checkApiHealth()">
+                <i class="fas fa-heartbeat"></i> Verificar API
+              </button>
+              <button class="btn btn-secondary" onclick="clearCache()">
+                <i class="fas fa-broom"></i> Limpiar Cache
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Verificación de login
+    function checkLogin() {
+      const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
+      const username = sessionStorage.getItem('adminUsername');
+      
+      if (!isLoggedIn || !username) {
+        // No está logueado, redirigir al login
+        window.location.href = 'admin-login.html';
+        return false;
+      }
+      
+      return true;
+    }
+
+    // Cerrar sesión
+    function logout() {
+      sessionStorage.removeItem('adminLoggedIn');
+      sessionStorage.removeItem('adminUsername');
+      window.location.href = 'admin-login.html';
+    }
+
+    // Mostrar sección específica
+    function showSection(sectionName) {
+      // Ocultar todas las secciones
+      document.querySelectorAll('.admin-section').forEach(section => {
+        section.classList.add('hidden');
+      });
+      
+      // Remover clase active de todos los enlaces
+      document.querySelectorAll('.admin-nav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      
+      // Mostrar sección seleccionada
+      const selectedSection = document.getElementById(sectionName + '-section');
+      if (selectedSection) {
+        selectedSection.classList.remove('hidden');
+      }
+      
+      // Marcar enlace como activo
+      event.target.classList.add('active');
+      
+      // Si es la sección de reseñas, cargar el contenido
+      if (sectionName === 'reviews') {
+        loadReviewsManager();
+      }
+    }
+
+    // Cargar el gestor de reseñas
+    function loadReviewsManager() {
+      const container = document.getElementById('reviews-manager-content');
+      if (container) {
+        // Aquí podrías cargar el contenido del reviews-manager
+        // Por ahora, mostraremos un mensaje
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px;">
+            <h4>Panel de Gestión de Reseñas</h4>
+            <p>Para acceder al gestor completo de reseñas, abre <a href="reviews-manager-compatible.html" target="_blank">reviews-manager-compatible.html</a></p>
+            <button class="btn btn-primary" onclick="window.open('reviews-manager-compatible.html', '_blank')">
+              <i class="fas fa-external-link-alt"></i> Abrir Gestor de Reseñas
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Cambiar ambiente
+    function switchEnvironment(envName) {
+      console.log('Cambiando a ambiente:', envName);
+      // Aquí implementarías la lógica de cambio de ambiente
+      showNotification(`Ambiente cambiado a: ${envName}`, 'info');
+    }
+
+    // Verificar salud de la API
+    async function checkApiHealth() {
+      try {
+        const response = await fetch('https://cabanasoldelnevado-reviews-staging.solnevadolastrancas.workers.dev/health');
+        const data = await response.json();
+        
+        if (response.ok) {
+          document.getElementById('api-status').innerHTML = '✅ Saludable';
+          showNotification('API funcionando correctamente', 'success');
+        } else {
+          document.getElementById('api-status').innerHTML = '❌ Error';
+          showNotification('Error en la API', 'error');
+        }
+      } catch (error) {
+        document.getElementById('api-status').innerHTML = '❌ Error de Conexión';
+        showNotification('Error de conexión con la API', 'error');
+      }
+    }
+
+    // Limpiar cache
+    function clearCache() {
+      sessionStorage.clear();
+      localStorage.clear();
+      showNotification('Cache limpiado correctamente', 'success');
+    }
+
+    // Mostrar notificación
+    function showNotification(message, type = 'info') {
+      // Implementar sistema de notificaciones
+      alert(message);
+    }
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', function() {
+      if (checkLogin()) {
+        // Está logueado, mostrar panel
+        document.getElementById('login-check').classList.add('hidden');
+        document.getElementById('admin-panel').classList.remove('hidden');
+        
+        // Cargar datos iniciales
+        checkApiHealth();
+        
+        // Configurar ambiente por defecto
+        document.getElementById('environment-selector').value = 'staging';
+        document.getElementById('api-url').textContent = 'https://cabanasoldelnevado-reviews-staging.solnevadolastrancas.workers.dev';
+      }
+    });
+  </script>
+</body>
+</html> 

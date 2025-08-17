@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acceso Administrativo - Cabaña Sol del Nevado</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .login-header {
+      margin-bottom: 30px;
+    }
+    
+    .login-header h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    
+    .login-header p {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+    
+    .login-form {
+      text-align: left;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ecf0f1;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .login-btn:hover {
+      transform: translateY(-2px);
+    }
+    
+    .login-btn:active {
+      transform: translateY(0);
+    }
+    
+    .error-message {
+      color: #e74c3c;
+      background: #fdf2f2;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+      border: 1px solid #fecaca;
+    }
+    
+    .back-link {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .back-link a {
+      color: #7f8c8d;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .back-link a:hover {
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <h1><i class="fas fa-lock"></i> Acceso Administrativo</h1>
+      <p>Panel de Gestión de Reseñas - Cabaña Sol del Nevado</p>
+    </div>
+    
+    <div class="error-message" id="error-message">
+      Usuario o contraseña incorrectos
+    </div>
+    
+    <form class="login-form" id="login-form">
+      <div class="form-group">
+        <label for="username">Usuario</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      
+      <button type="submit" class="login-btn">
+        <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+      </button>
+    </form>
+    
+    <div class="back-link">
+      <a href="index.html"><i class="fas fa-arrow-left"></i> Volver al Sitio</a>
+    </div>
+  </div>
+
+  <script>
+    // Credenciales de administrador (en producción esto debería estar en el servidor)
+    const ADMIN_CREDENTIALS = {
+      username: 'admin',
+      password: 'solnevado2024'
+    };
+
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      
+      // Validar credenciales
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+        // Login exitoso - guardar en sessionStorage
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        sessionStorage.setItem('adminUsername', username);
+        
+        // Redirigir al panel de administración
+        window.location.href = 'admin-panel.html';
+      } else {
+        // Mostrar error
+        errorMessage.style.display = 'block';
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+      }
+    });
+
+    // Verificar si ya está logueado
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+      window.location.href = 'admin-panel.html';
+    }
+  </script>
+</body>
+</html> 

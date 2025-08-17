@@ -167,6 +167,38 @@ body {
   position: relative;
 }
 
+/* Enlace administrativo */
+.admin-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.admin-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(52, 73, 94, 0.8);
+  color: white;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.admin-button:hover {
+  background: rgba(52, 73, 94, 1);
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.admin-button i {
+  font-size: 1.2rem;
+}
+
 .hero-content h1 {
   font-size: 3.5rem;
   margin-bottom: 1rem;

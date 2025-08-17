@@ -3,7 +3,7 @@ import { Router } from 'itty-router';
 import { authMiddleware, requireAdmin, requireOwnership } from '../middleware/auth.js';
 import { addCorsHeaders, handleCors } from '../middleware/cors.js';
 import { addRateLimitHeaders } from '../middleware/rateLimit.js';
-import { generateId, validateReviewData } from '../utils/helpers.js';
+import { generateId, validateReviewData } from '../utils/validation.js';
 
 const router = Router();
 

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cabaña Sol del Nevado - STAGING</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .staging-banner {
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .staging-banner h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .staging-banner p {
+      margin: 5px 0 0 0;
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+    
+    .staging-banner .btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      margin-left: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .staging-banner .btn:hover {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
+    }
+    
+    body {
+      padding-top: 100px;
+    }
+    
+    .api-status {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .api-status h3 {
+      color: #2c5aa0;
+      margin-bottom: 15px;
+    }
+    
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .status-item {
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+    }
+    
+    .status-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #495057;
+    }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .status-badge.healthy {
+      background: #28a745;
+      color: white;
+    }
+    
+    .status-badge.error {
+      background: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Banner de Staging -->
+  <div class="staging-banner">
+    <h2>
+      <i class="fas fa-flask"></i>
+      ENTORNO DE STAGING
+      <a href="reviews-manager-staging.html" class="btn">
+        <i class="fas fa-cog"></i> Panel Admin
+      </a>
+    </h2>
+    <p>Esta es una versión de prueba. Los datos no se guardan en producción.</p>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Cabaña Sol del Nevado</h1>
+        <p class="hero-subtitle">Tu refugio en la montaña</p>
+        <div class="hero-buttons">
+          <a href="#accommodation" class="btn btn-primary">Ver Alojamiento</a>
+          <a href="#reseñas" class="btn btn-secondary">Ver Reseñas</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Estado de la API -->
+    <section class="api-status">
+      <h3><i class="fas fa-server"></i> Estado de la API de Staging</h3>
+      <div class="status-grid">
+        <div class="status-item">
+          <strong>API Backend</strong>
+          <span class="status-badge healthy" id="api-status">✅ Saludable</span>
+        </div>
+        <div class="status-item">
+          <strong>Base de Datos</strong>
+          <span class="status-badge healthy" id="db-status">✅ Conectada</span>
+        </div>
+        <div class="status-item">
+          <strong>Almacenamiento</strong>
+          <span class="status-badge healthy" id="storage-status">✅ Conectado</span>
+        </div>
+        <div class="status-item">
+          <strong>URL API</strong>
+          <code style="font-size: 0.8rem; display: block; margin-top: 5px;">
+            cabanasoldelnevado-reviews-staging.solnevadolastrancas.workers.dev
+          </code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Alojamiento -->
+    <section id="accommodation" class="accommodation">
+      <h2>Nuestro Alojamiento</h2>
+      <div class="accommodation-content">
+        <div class="accommodation-text">
+          <h3>Cabaña Sol del Nevado</h3>
+          <p>Disfruta de una estadía inolvidable en nuestra hermosa cabaña ubicada en las montañas. Con vistas panorámicas y todas las comodidades necesarias para una experiencia única.</p>
+          <ul class="amenities">
+            <li><i class="fas fa-mountain"></i> Vistas panorámicas</li>
+            <li><i class="fas fa-fire"></i> Chimenea</li>
+            <li><i class="fas fa-wifi"></i> WiFi gratuito</li>
+            <li><i class="fas fa-parking"></i> Estacionamiento</li>
+            <li><i class="fas fa-utensils"></i> Cocina equipada</li>
+            <li><i class="fas fa-bed"></i> 3 dormitorios</li>
+          </ul>
+        </div>
+        <div class="accommodation-gallery">
+          <div class="gallery-grid">
+            <div class="gallery-item">
+              <img src="fotos/1.jpg" alt="Cabaña Sol del Nevado" loading="lazy">
+            </div>
+            <div class="gallery-item">
+              <img src="fotos/2.jpg" alt="Interior de la cabaña" loading="lazy">
+            </div>
+            <div class="gallery-item">
+              <img src="fotos/3.jpg" alt="Vistas desde la cabaña" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Reseñas -->
+    <section id="reseñas" class="reviews">
+      <h2>Reseñas de Nuestros Huéspedes</h2>
+      <div class="reviews-content">
+        <div class="reviews-stats">
+          <div class="stat">
+            <h3 id="total-reviews">0</h3>
+            <p>Total de Reseñas</p>
+          </div>
+          <div class="stat">
+            <h3 id="avg-rating">0.0</h3>
+            <p>Calificación Promedio</p>
+          </div>
+          <div class="stat">
+            <h3 id="platform-reviews">0</h3>
+            <p>Plataformas</p>
+          </div>
+        </div>
+        
+        <div class="reviews-carousel" id="reviews-carousel">
+          <!-- Las reseñas se cargarán dinámicamente -->
+        </div>
+        
+        <div class="reviews-actions">
+          <a href="reviews-manager-staging.html" class="btn btn-primary">
+            <i class="fas fa-cog"></i> Gestionar Reseñas
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            <i class="fas fa-envelope"></i> Contactar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contact" class="contact">
+      <h2>Contacto</h2>
+      <div class="contact-content">
+        <div class="contact-info">
+          <h3>Información de Contacto</h3>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+56 9 40990286</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>contacto@cabanasoldelnevado.cl</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Las Trancas, Chile</span>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Envíanos un Mensaje</h3>
+          <form id="contact-form">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="Tu email" required>
+            </div>
+            <div class="form-group">
+              <textarea id="message" name="message" placeholder="Tu mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Verificar estado de la API
+    async function checkApiHealth() {
+      const apiUrl = 'https://cabanasoldelnevado-reviews-staging.solnevadolastrancas.workers.dev';
+      
+      try {
+        // Verificar health check
+        const healthResponse = await fetch(`${apiUrl}/health`);
+        if (healthResponse.ok) {
+          document.getElementById('api-status').textContent = '✅ Saludable';
+          document.getElementById('api-status').className = 'status-badge healthy';
+        } else {
+          throw new Error('Health check failed');
+        }
+        
+        // Verificar API de reseñas
+        const reviewsResponse = await fetch(`${apiUrl}/api/reviews`);
+        if (reviewsResponse.ok) {
+          const data = await reviewsResponse.json();
+          updateReviewsStats(data);
+          loadReviews(data.reviews || []);
+        }
+        
+      } catch (error) {
+        console.error('Error al verificar API:', error);
+        document.getElementById('api-status').textContent = '❌ Error';
+        document.getElementById('api-status').className = 'status-badge error';
+      }
+    }
+    
+    // Actualizar estadísticas de reseñas
+    function updateReviewsStats(data) {
+      const total = data.reviews ? data.reviews.length : 0;
+      const avgRating = total > 0 ? 
+        (data.reviews.reduce((sum, r) => sum + r.rating, 0) / total).toFixed(1) : '0.0';
+      
+      document.getElementById('total-reviews').textContent = total;
+      document.getElementById('avg-rating').textContent = avgRating;
+      document.getElementById('platform-reviews').textContent = '2'; // Booking + Airbnb
+    }
+    
+    // Cargar reseñas en el carousel
+    function loadReviews(reviews) {
+      const carousel = document.getElementById('reviews-carousel');
+      if (!carousel || reviews.length === 0) return;
+      
+      // Mostrar solo las primeras 3 reseñas
+      const displayReviews = reviews.slice(0, 3);
+      
+      carousel.innerHTML = displayReviews.map(review => `
+        <div class="review-card">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <div class="reviewer-avatar">${review.guestName.charAt(0)}</div>
+              <div>
+                <h4>${review.guestName}</h4>
+                <p>${review.flag} ${review.country}</p>
+              </div>
+            </div>
+            <div class="review-rating">
+              ${generateStars(review.rating)}
+            </div>
+          </div>
+          <div class="review-content">
+            <p>"${review.reviewText}"</p>
+          </div>
+          <div class="review-footer">
+            <span class="platform-badge ${review.platform}">
+              ${review.platform === 'booking' ? 'Booking.com' : 
+                review.platform === 'airbnb' ? 'Airbnb' : 'Directo'}
+            </span>
+            <span class="review-date">
+              ${new Date(review.createdAt).toLocaleDateString('es-CL')}
+            </span>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Generar estrellas
+    function generateStars(rating) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+          stars += '<i class="fas fa-star"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
+      }
+      return stars;
+    }
+    
+    // Manejar formulario de contacto
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('En el entorno de staging, este formulario no envía emails reales.');
+    });
+    
+    // Verificar API al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      checkApiHealth();
+    });
+  </script>
+</body>
+</html> 
